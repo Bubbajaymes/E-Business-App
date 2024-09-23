@@ -1,17 +1,23 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import {  ArrowLeftOutlined, MenuFoldOutlined, SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
 import Logo from "../assets/images/Serene Blue.png";
 import Profile from './headerExtras/Profile';
 import { Badge } from 'antd';
+import { ShopContext } from '../context/ShopContext';
 
 export default function Navbar() {
 
     const [visible, setVisible] = useState(false);
+    const {setShowSearch, getCartCount} = useContext(ShopContext);
+
+
   return (
     <div className='flex items-center justify-between py-5 font-medium'>
-        <img src={Logo} alt='logo' className='w-28' />
+        <Link to='/'>
+            <img src={Logo} alt='logo' className='w-28' />    
+        </Link>
         <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
             <NavLink to='/' className='flex flex-col items-center gap-1'>
                 <p>HOME</p>
@@ -31,10 +37,10 @@ export default function Navbar() {
             </NavLink>
         </ul>
         <div className='flex items-center gap-6'>
-           <SearchOutlined style={{fontSize: '19px'}} className='cursor-pointer ' />
+           <SearchOutlined onClick={()=>setShowSearch(true)} style={{fontSize: '19px'}} className='cursor-pointer ' />
            <Profile />
-            <Link>
-                <Badge count= {4}>
+            <Link to='/cart'>
+                <Badge count= {getCartCount()}>
                 <ShoppingCartOutlined className='relative' style={{fontSize: '19px'}}  />
                 </Badge>
             </Link>    

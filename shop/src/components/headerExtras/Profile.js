@@ -1,6 +1,7 @@
 import { Dropdown, Menu, Space, Typography } from 'antd';
 import React, { useState } from 'react'
 import { UserOutlined, SettingOutlined, LogoutOutlined, OrderedListOutlined, TruckOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const options = [
     {
@@ -80,7 +81,7 @@ const Profile = () => {
                     onMouseEnter={() => handleMouseEnter('UserOutlined')}
                     onMouseLeave={handleMouseLeave} 
                   >
-                    <UserOutlined />
+                    <Link to='/login'><UserOutlined className='text-gray-600' /></Link>
                     {/* Profile */}
                   
                   </Space>
